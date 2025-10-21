@@ -2,7 +2,7 @@
 
 ## Prioridade (Mínimo Viável)
 
-- [ ] Docs: README / to-do (this file)
+- [x] Docs: README / to-do (this file)
 - [ ] Criar projeto Nest (scaffold)
 - [ ] Adicionar dependências principais (typeorm, class-validator, jwt, mysql)
 - [ ] Configurar projeto (tsconfig, lint, scripts npm)
@@ -12,7 +12,7 @@
 
 ## API (Core)
 
-- [ ] POST /tasks — criar tarefa (validação descricao obrigatória)
+- [ ] POST /tasks — criar tarefa (validação descrição obrigatória)
 - [ ] GET /tasks — listar tarefas
 - [ ] GET /tasks/:id — buscar por id
 - [ ] PATCH /tasks/:id/status — atualizar status (PENDENTE/CONCLUIDA)
