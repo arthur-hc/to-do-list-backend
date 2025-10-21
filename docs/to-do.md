@@ -3,7 +3,7 @@
 ## Prioridade (Mínimo Viável)
 
 - [x] Docs: README / to-do (this file)
-- [ ] Criar projeto Nest (scaffold)
+- [x] Criar projeto Nest (scaffold)
 - [ ] Adicionar dependências principais (typeorm, class-validator, jwt, mysql)
 - [ ] Configurar projeto (tsconfig, lint, scripts npm)
 - [ ] Configurar Docker (Dockerfile backend + docker-compose db)
