@@ -1,0 +1,49 @@
+# Docker Compose - Desenvolvimento Full (App + MySQL em containers)
+# Use: docker-compose -f docker-compose.dev.yml up --build
+
+services:
+  app:
+    build:
+      context: .
+      target: development
+    image: todolist-backend:dev
+    container_name: todolist-app-dev
+    ports:
+      - '${PORT:-3000}:3000'
+    depends_on:
+      - mysql
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - DB_HOST=${DB_HOST:-mysql}
+      - DB_PORT=${DB_PORT:-3306}
+      - DB_USER=${DB_USER:-root}
+      - DB_PASSWORD=${DB_PASSWORD:-root}
+      - DB_NAME=${DB_NAME:-todolist_db}
+      - JWT_SECRET=${JWT_SECRET:-your-secret-key}
+      # Variável para hot reload funcionar no Docker
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      # Hot reload: mapeia código local para o container
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command:
+      [
+        'sh',
+        '-c',
+        "npx nodemon --watch src --ext ts --exec 'npm run start:dev'",
+      ]
+
+  mysql:
+    image: mysql:8.0
+    container_name: todolist-mysql-dev
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-todolist_db}
+    ports:
+      - '${MYSQL_PORT:-3307}:3306'
+    volumes:
+      - todolist_mysql_dev_data:/var/lib/mysql
+
+volumes:
+  todolist_mysql_dev_data:

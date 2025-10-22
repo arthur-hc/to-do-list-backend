@@ -11,35 +11,41 @@ O que contém aqui
 - Pontos importantes (config, testes, documentação)
 - Referência ao to-do do projeto (progresso e próximas tarefas)
 
-Pré-requisitos
+Pré-requisitos:
 
 - Node.js (>= 20)
 - Docker & docker-compose
 - npm (ou pnpm/yarn)
 
-Rodando com Docker (app + banco)
+# Rodar localmente + banco via docker
 
-1. Copiar variáveis de ambiente:
-   - PowerShell: `Copy-Item .env.example .env`
-   - Bash: `cp .env.example .env`
-2. Subir app + DB em um comando:
-   - `docker-compose up --build`
-   - Para rodar em background: `docker-compose up --build -d`
-3. Executar migrations (se aplicável):
-   - `docker-compose exec app npm run migrate`
-4. Logs / shell do container:
-   - `docker-compose logs -f app`
-   - `docker-compose exec app sh` (ou bash, dependendo da imagem)
+- 1. Rodar (Subir apenas MySQL)
+     docker-compose -f docker-compose.local.yml up -d
+- 2. Instalar dependências
+     npm install
+- 3. Rodar app localmente
+     npm run start:dev
+- 4. Parar MySQL (quando terminar)
+     docker-compose -f docker-compose.local.yml down
 
-Executando local (sem Docker)
+# Subir App + MySQL em containers
 
-1. Instalar dependências:
-   - `npm install`
-2. Subir DB (opcional via Docker) e ajustar `.env` para apontar para ele
-3. Rodar em dev:
-   - `npm run start:dev`
+- 1. Rodar (Subir App + DB)
+     docker-compose -f docker-compose.dev.yml up --build
+- 1. Ou em background
+     docker-compose -f docker-compose.dev.yml up -d --build
+- 2. Parar tudo (quando terminar)
+     docker-compose -f docker-compose.dev.yml down
 
-Observações
+# Subir App + MySQL em containers (Prod - versão otmizada)
 
-- O Swagger / OpenAPI documentará os endpoints — README propositalmente enxuto.
-- Para rodar tudo via Docker, use `docker-compose up --build`. Depois ajuste `.env` se necessário.
+- 1. Rodar (Subir App + DB)
+     docker-compose -f docker-compose.prod.yml up --build -d
+- 1. Ou em background
+     docker-compose -f docker-compose.prod.yml up -d --build
+- 2. Parar tudo (quando terminar)
+     docker-compose -f docker-compose.prod.yml down
+
+Observações:
+
+- O Swagger documentará os endpoints — README propositalmente enxuto.

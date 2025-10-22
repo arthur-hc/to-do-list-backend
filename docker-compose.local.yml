@@ -1,0 +1,18 @@
+# Docker Compose - Desenvolvimento Local (apenas MySQL)
+# Use: docker-compose -f docker-compose.local.yml up -d
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: todolist-mysql-local
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-todolist_db}
+    ports:
+      - '${MYSQL_PORT:-3307}:3306'
+    volumes:
+      - todolist_mysql_local_data:/var/lib/mysql
+
+volumes:
+  todolist_mysql_local_data:
