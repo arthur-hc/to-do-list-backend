@@ -6,7 +6,7 @@
 - [x] Criar projeto Nest (scaffold)
 - [x] Adicionar dependências principais (typeorm, class-validator, jwt, mysql)
 - [x] Configurar projeto (tsconfig, lint, scripts npm)
-- [ ] Configurar Docker (Dockerfile backend + docker-compose db)
+- [x] Configurar Docker (Dockerfile backend + docker-compose db)
 - [ ] Configurar banco (migrations, seed básica)
 - [ ] Configurar entities
 
