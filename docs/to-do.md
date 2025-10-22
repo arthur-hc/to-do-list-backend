@@ -8,7 +8,7 @@
 - [x] Configurar projeto (tsconfig, lint, scripts npm)
 - [x] Configurar Docker (Dockerfile backend + docker-compose db)
 - [x] Configurar banco (migrations, seed básica)
-- [ ] Configurar entities
+- [x] Configurar entities
 
 ## API (Core)
 
