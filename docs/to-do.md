@@ -12,7 +12,7 @@
 
 ## API (Core)
 
-- [ ] POST /tasks — criar tarefa (validação descrição obrigatória)
+- [x] POST /tasks — criar tarefa (validação descrição obrigatória)
 - [ ] GET /tasks — listar tarefas
 - [ ] GET /tasks/:id — buscar por id
 - [ ] PATCH /tasks/:id/status — atualizar status (PENDENTE/CONCLUIDA)
@@ -29,3 +29,8 @@
 
 - [ ] Testes: unitários (useCases) + integração
 - [ ] Swagger docs
+
+# Performance (Futuro)
+
+- [ ] Paginação na listagem
+- [ ] Query helper para permitir mais filtros sem if
