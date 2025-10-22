@@ -1,4 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { config } from 'dotenv';
+
+config();
 
 export const mySqlDBConfig: TypeOrmModuleOptions = {
   type: 'mysql',
@@ -12,4 +15,10 @@ export const mySqlDBConfig: TypeOrmModuleOptions = {
   synchronize: process.env.NODE_ENV !== 'production',
   logging: process.env.NODE_ENV === 'development',
   autoLoadEntities: true,
+
+  entities: ['dist/modules/**/infrastructure/entity/TypeOrm*.entity.js'],
+
+  migrationsRun: process.env.NODE_ENV === 'production',
+  migrations: ['dist/modules/**/infrastructure/migration/*.js'],
+  migrationsTableName: 'migrations_history',
 };
