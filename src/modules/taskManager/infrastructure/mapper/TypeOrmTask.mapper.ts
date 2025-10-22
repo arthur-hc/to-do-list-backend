@@ -1,7 +1,7 @@
 import { Task } from '../../domain/entity/Task.entity';
 import { TypeOrmTaskEntity } from '../entity/TypeOrmTask.entity';
 
-export class TypeOrmTasEntityMapper {
+export class TypeOrmTaskEntityMapper {
   public static fromTypeOrmToDomain(typeOrmTask: TypeOrmTaskEntity): Task {
     return new Task(
       typeOrmTask.id,
@@ -15,14 +15,14 @@ export class TypeOrmTasEntityMapper {
   }
 
   public static fromDomainToTypeOrm(domainTask: Task): TypeOrmTaskEntity {
-    const typeOrmTask = new TypeOrmTaskEntity();
-    typeOrmTask.id = domainTask.id;
-    typeOrmTask.createdAt = domainTask.createdAt;
-    typeOrmTask.updatedAt = domainTask.updatedAt;
-    typeOrmTask.title = domainTask.title;
-    typeOrmTask.description = domainTask.description;
-    typeOrmTask.completed = domainTask.completed;
-    typeOrmTask.deletedAt = domainTask.deletedAt;
-    return typeOrmTask;
+    return Object.assign(new TypeOrmTaskEntity(), {
+      id: domainTask.id,
+      title: domainTask.title,
+      description: domainTask.description,
+      completed: domainTask.completed,
+      createdAt: domainTask.createdAt,
+      updatedAt: domainTask.updatedAt,
+      deletedAt: domainTask.deletedAt,
+    });
   }
 }

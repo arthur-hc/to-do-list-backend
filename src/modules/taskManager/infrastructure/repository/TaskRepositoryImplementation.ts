@@ -4,7 +4,7 @@ import { ITaskRepository } from '../../domain/interfaces/ITask.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TypeOrmTaskEntity } from '../entity/TypeOrmTask.entity';
 import { Repository } from 'typeorm';
-import { TypeOrmTasEntityMapper } from '../mapper/TypeOrmTask.mapper';
+import { TypeOrmTaskEntityMapper } from '../mapper/TypeOrmTask.mapper';
 
 @Injectable()
 export class TaskRepositoryImplementation implements ITaskRepository {
@@ -16,21 +16,23 @@ export class TaskRepositoryImplementation implements ITaskRepository {
   async findAll(): Promise<Task[]> {
     const tasks = await this.taskRepository.find();
     return tasks.map((typeOrmTask) =>
-      TypeOrmTasEntityMapper.fromTypeOrmToDomain(typeOrmTask),
+      TypeOrmTaskEntityMapper.fromTypeOrmToDomain(typeOrmTask),
     );
   }
   async findById(id: number): Promise<Task | null> {
     const task = await this.taskRepository.findOne({ where: { id } });
-    return task ? TypeOrmTasEntityMapper.fromTypeOrmToDomain(task) : null;
+    return task ? TypeOrmTaskEntityMapper.fromTypeOrmToDomain(task) : null;
   }
-  async create(task: Task): Promise<Task> {
+  async create(
+    task: Pick<Task, 'title' | 'description' | 'completed'>,
+  ): Promise<Task> {
     const newTask = this.taskRepository.create(task);
     const savedTask = await this.taskRepository.save(newTask);
-    return TypeOrmTasEntityMapper.fromTypeOrmToDomain(savedTask);
+    return TypeOrmTaskEntityMapper.fromTypeOrmToDomain(savedTask);
   }
   async update(task: Task): Promise<Task> {
     const updatedTask = await this.taskRepository.save(task);
-    return TypeOrmTasEntityMapper.fromTypeOrmToDomain(updatedTask);
+    return TypeOrmTaskEntityMapper.fromTypeOrmToDomain(updatedTask);
   }
   async delete(id: number): Promise<void> {
     await this.taskRepository.delete(id);
