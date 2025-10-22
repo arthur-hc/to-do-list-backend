@@ -34,3 +34,4 @@
 
 - [ ] Paginação na listagem
 - [ ] Query helper para permitir mais filtros sem if
+- [ ] Criar camada de presenter

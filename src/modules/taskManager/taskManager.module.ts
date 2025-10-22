@@ -3,7 +3,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmTaskEntity } from './infrastructure/entity/TypeOrmTask.entity';
 import { TaskRepositoryImplementation } from './infrastructure/repository/TaskRepositoryImplementation';
 import { CreateTaskController } from './api/controller/CreateTask.controller';
+import { GetAllTasksController } from './api/controller/GetAllTasks.controller';
 import { CreateTaskUseCase } from './application/useCase/CreateTaskUseCase/CreateTaskUseCase';
+import { GetAllTasksUseCase } from './application/useCase/GetAllTasksUseCase/GetAllTasksUseCase';
 import { ITaskRepositoryToken } from './domain/interfaces/ITask.repository';
 
 @Module({
@@ -16,8 +18,9 @@ import { ITaskRepositoryToken } from './domain/interfaces/ITask.repository';
     },
     // Use Cases
     CreateTaskUseCase,
+    GetAllTasksUseCase,
   ],
-  controllers: [CreateTaskController],
+  controllers: [CreateTaskController, GetAllTasksController],
   exports: [ITaskRepositoryToken],
 })
 export class TaskManagerModule {}
