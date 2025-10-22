@@ -13,8 +13,8 @@
 ## API (Core)
 
 - [x] POST /tasks — criar tarefa (validação descrição obrigatória)
-- [ ] GET /tasks — listar tarefas
-- [ ] GET /tasks/:id — buscar por id
+- [x] GET /tasks — listar tarefas
+- [x] GET /tasks/:id — buscar por id
 - [ ] PATCH /tasks/:id/status — atualizar status (PENDENTE/CONCLUIDA)
 - [ ] DELETE /tasks/:id — remover tarefa
 - [ ] Gerenciador de erros global (formatar respostas 400/404/500)
