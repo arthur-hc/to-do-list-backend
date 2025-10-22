@@ -37,7 +37,7 @@ Pré-requisitos:
 - 2. Parar tudo (quando terminar)
      docker-compose -f docker-compose.dev.yml down
 
-# Subir App + MySQL em containers (Prod - versão otmizada)
+# Subir App + MySQL em containers (Prod - versão otimizada)
 
 - 1. Rodar (Subir App + DB)
      docker-compose -f docker-compose.prod.yml up --build -d

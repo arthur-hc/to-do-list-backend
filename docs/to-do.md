@@ -7,7 +7,7 @@
 - [x] Adicionar dependências principais (typeorm, class-validator, jwt, mysql)
 - [x] Configurar projeto (tsconfig, lint, scripts npm)
 - [x] Configurar Docker (Dockerfile backend + docker-compose db)
-- [ ] Configurar banco (migrations, seed básica)
+- [x] Configurar banco (migrations, seed básica)
 - [ ] Configurar entities
 
 ## API (Core)

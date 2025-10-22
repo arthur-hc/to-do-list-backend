@@ -9,8 +9,10 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
       MYSQL_DATABASE: ${MYSQL_DATABASE:-todolist_db}
+      MYSQL_USER: ${MYSQL_USER:-todolist_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-todolist_pass}
     ports:
-      - '${MYSQL_PORT:-3307}:3306'
+      - '${DB_PORT:-3307}:3306'
     volumes:
       - todolist_mysql_local_data:/var/lib/mysql
 
