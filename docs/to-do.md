@@ -15,9 +15,8 @@
 - [x] POST /tasks — criar tarefa (validação descrição obrigatória)
 - [x] GET /tasks — listar tarefas
 - [x] GET /tasks/:id — buscar por id
-- [ ] PATCH /tasks/:id/status — atualizar status (PENDENTE/CONCLUIDA)
+- [x] PATCH /tasks/:id/status — atualizar status (PENDENTE/CONCLUIDA)
 - [ ] DELETE /tasks/:id — remover tarefa
-- [ ] Gerenciador de erros global (formatar respostas 400/404/500)
 
 ## Autenticação & Segurança
 
@@ -30,8 +29,9 @@
 - [ ] Testes: unitários (useCases) + integração
 - [ ] Swagger docs
 
-# Performance (Futuro)
+# Fase 2 (Futuro)
 
 - [ ] Paginação na listagem
 - [ ] Query helper para permitir mais filtros sem if
 - [ ] Criar camada de presenter
+- [ ] Gerenciador de erros global (formatar respostas 400/404/500)
