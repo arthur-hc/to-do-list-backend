@@ -30,7 +30,7 @@
 - [ ] Testes: unitários controllers
 - [ ] Testes: unitários repository
 - [ ] Testes: integração
-- [ ] Swagger docs
+- [x] Swagger docs
 
 # Fase 2 (Futuro)
 
