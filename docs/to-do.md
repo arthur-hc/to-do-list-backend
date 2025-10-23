@@ -16,7 +16,7 @@
 - [x] GET /tasks — listar tarefas
 - [x] GET /tasks/:id — buscar por id
 - [x] PATCH /tasks/:id/status — atualizar status (PENDENTE/CONCLUIDA)
-- [ ] DELETE /tasks/:id — remover tarefa
+- [x] DELETE /tasks/:id — remover tarefa
 
 ## Autenticação & Segurança
 
@@ -26,7 +26,10 @@
 
 ## Qualidade & Docs
 
-- [ ] Testes: unitários (useCases) + integração
+- [x] Testes: unitários useCases
+- [ ] Testes: unitários controllers
+- [ ] Testes: unitários repository
+- [ ] Testes: integração
 - [ ] Swagger docs
 
 # Fase 2 (Futuro)
