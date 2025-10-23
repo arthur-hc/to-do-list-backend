@@ -49,3 +49,20 @@ Pré-requisitos:
 Observações:
 
 - O Swagger documentará os endpoints — README propositalmente enxuto.
+
+# Documentação da API (Swagger)
+
+A API possui documentação interativa completa via Swagger
+
+# O que você encontrará no Swagger:
+
+- ✅ **Endpoints completos**: GET, POST, PATCH, DELETE para tarefas
+- ✅ **Exemplos de requisições**: Dados de exemplo para todos os endpoints
+- ✅ **Schemas detalhados**: Documentação de todos os DTOs e responses
+- ✅ **Validações**: Regras de validação para cada campo
+- ✅ **Teste interativo**: Execute requisições diretamente na interface
+- ✅ **Filtros**: Documentação de query parameters (ex: `?completed=true`)
+
+# Como acessar:
+
+- http://localhost:3000/api/docs ou url domínio http://url-dominio/api/docs
