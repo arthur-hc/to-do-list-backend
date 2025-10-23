@@ -1,7 +1,12 @@
 import { IsOptional, IsIn } from 'class-validator';
 import { Transform } from 'class-transformer';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 
 export class GetAllTasksDto {
+  @ApiPropertyOptional({
+    description: 'Filtrar tarefas por status de conclusão',
+    example: true,
+  })
   @IsOptional()
   @IsIn([true, false, 'true', 'false'], {
     message: 'Completed must be true or false',
