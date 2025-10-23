@@ -39,7 +39,7 @@ export class TaskRepositoryImplementation implements ITaskRepository {
     const savedTask = await this.taskRepository.save(newTask);
     return TypeOrmTaskEntityMapper.fromTypeOrmToDomain(savedTask);
   }
-  async update(task: Task): Promise<Task> {
+  async update(task: Partial<Task>): Promise<Task> {
     const updatedTask = await this.taskRepository.save(task);
     return TypeOrmTaskEntityMapper.fromTypeOrmToDomain(updatedTask);
   }
