@@ -24,4 +24,15 @@ export class Task {
     this.completed = completed;
     this.deletedAt = deletedAt;
   }
+
+  static createNew(
+    title: string,
+    description: string,
+  ): Pick<Task, 'title' | 'description' | 'completed'> {
+    return {
+      title,
+      description,
+      completed: false,
+    };
+  }
 }

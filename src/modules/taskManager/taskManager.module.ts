@@ -1,17 +1,40 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ITaskRepositoryToken } from './domain/interfaces/ITask.repository';
 import { TypeOrmTaskEntity } from './infrastructure/entity/TypeOrmTask.entity';
 import { TaskRepositoryImplementation } from './infrastructure/repository/TaskRepositoryImplementation';
+import { CreateTaskController } from './api/controller/CreateTask.controller';
+import { GetAllTasksController } from './api/controller/GetAllTasks.controller';
+import { GetTaskByIdController } from './api/controller/GetTaskById.controller';
+import { UpdateTaskStatusController } from './api/controller/UpdateTaskStatus.controller';
+import { DeleteTaskController } from './api/controller/DeleteTask.controller';
+import { CreateTaskUseCase } from './application/useCase/CreateTaskUseCase/CreateTaskUseCase';
+import { GetAllTasksUseCase } from './application/useCase/GetAllTasksUseCase/GetAllTasksUseCase';
+import { GetTaskByIdUseCase } from './application/useCase/GetTaskByIdUseCase/GetTaskByIdUseCase';
+import { UpdateTaskStatusUseCase } from './application/useCase/UpdateTaskStatusUseCase/UpdateTaskStatusUseCase';
+import { DeleteTaskUseCase } from './application/useCase/DeleteTaskUseCase/DeleteTaskUseCase';
+import { ITaskRepositoryToken } from './domain/interfaces/ITask.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([TypeOrmTaskEntity])],
   providers: [
-    TaskRepositoryImplementation,
+    // Repositories Injection
     {
       provide: ITaskRepositoryToken,
       useClass: TaskRepositoryImplementation,
     },
+    // Use Cases
+    CreateTaskUseCase,
+    GetAllTasksUseCase,
+    GetTaskByIdUseCase,
+    UpdateTaskStatusUseCase,
+    DeleteTaskUseCase,
+  ],
+  controllers: [
+    CreateTaskController,
+    GetAllTasksController,
+    GetTaskByIdController,
+    UpdateTaskStatusController,
+    DeleteTaskController,
   ],
   exports: [ITaskRepositoryToken],
 })

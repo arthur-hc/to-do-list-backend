@@ -4,7 +4,8 @@ import { ITaskRepository } from '../../domain/interfaces/ITask.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TypeOrmTaskEntity } from '../entity/TypeOrmTask.entity';
 import { Repository } from 'typeorm';
-import { TypeOrmTasEntityMapper } from '../mapper/TypeOrmTask.mapper';
+import { TypeOrmTaskEntityMapper } from '../mapper/TypeOrmTask.mapper';
+import { FindAllTasksFilter } from '../../domain/interfaces/IFindAllTasksFilter';
 
 @Injectable()
 export class TaskRepositoryImplementation implements ITaskRepository {
@@ -13,24 +14,34 @@ export class TaskRepositoryImplementation implements ITaskRepository {
     private readonly taskRepository: Repository<TypeOrmTaskEntity>,
   ) {}
 
-  async findAll(): Promise<Task[]> {
-    const tasks = await this.taskRepository.find();
+  async findAll(filter?: FindAllTasksFilter): Promise<Task[]> {
+    const queryBuilder = this.taskRepository.createQueryBuilder('task');
+
+    if (filter?.completed !== undefined) {
+      queryBuilder.where('task.completed = :completed', {
+        completed: filter.completed,
+      });
+    }
+
+    const tasks = await queryBuilder.getMany();
     return tasks.map((typeOrmTask) =>
-      TypeOrmTasEntityMapper.fromTypeOrmToDomain(typeOrmTask),
+      TypeOrmTaskEntityMapper.fromTypeOrmToDomain(typeOrmTask),
     );
   }
   async findById(id: number): Promise<Task | null> {
     const task = await this.taskRepository.findOne({ where: { id } });
-    return task ? TypeOrmTasEntityMapper.fromTypeOrmToDomain(task) : null;
+    return task ? TypeOrmTaskEntityMapper.fromTypeOrmToDomain(task) : null;
   }
-  async create(task: Task): Promise<Task> {
+  async create(
+    task: Pick<Task, 'title' | 'description' | 'completed'>,
+  ): Promise<Task> {
     const newTask = this.taskRepository.create(task);
     const savedTask = await this.taskRepository.save(newTask);
-    return TypeOrmTasEntityMapper.fromTypeOrmToDomain(savedTask);
+    return TypeOrmTaskEntityMapper.fromTypeOrmToDomain(savedTask);
   }
-  async update(task: Task): Promise<Task> {
+  async update(task: Partial<Task>): Promise<Task> {
     const updatedTask = await this.taskRepository.save(task);
-    return TypeOrmTasEntityMapper.fromTypeOrmToDomain(updatedTask);
+    return TypeOrmTaskEntityMapper.fromTypeOrmToDomain(updatedTask);
   }
   async delete(id: number): Promise<void> {
     await this.taskRepository.delete(id);

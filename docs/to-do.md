@@ -12,12 +12,11 @@
 
 ## API (Core)
 
-- [ ] POST /tasks — criar tarefa (validação descrição obrigatória)
-- [ ] GET /tasks — listar tarefas
-- [ ] GET /tasks/:id — buscar por id
-- [ ] PATCH /tasks/:id/status — atualizar status (PENDENTE/CONCLUIDA)
-- [ ] DELETE /tasks/:id — remover tarefa
-- [ ] Gerenciador de erros global (formatar respostas 400/404/500)
+- [x] POST /tasks — criar tarefa (validação descrição obrigatória)
+- [x] GET /tasks — listar tarefas
+- [x] GET /tasks/:id — buscar por id
+- [x] PATCH /tasks/:id/status — atualizar status (PENDENTE/CONCLUIDA)
+- [x] DELETE /tasks/:id — remover tarefa
 
 ## Autenticação & Segurança
 
@@ -27,5 +26,15 @@
 
 ## Qualidade & Docs
 
-- [ ] Testes: unitários (useCases) + integração
+- [x] Testes: unitários useCases
+- [ ] Testes: unitários controllers
+- [ ] Testes: unitários repository
+- [ ] Testes: integração
 - [ ] Swagger docs
+
+# Fase 2 (Futuro)
+
+- [ ] Paginação na listagem
+- [ ] Query helper para permitir mais filtros sem if
+- [ ] Criar camada de presenter
+- [ ] Gerenciador de erros global (formatar respostas 400/404/500)

@@ -15,6 +15,8 @@ export const mySqlDBConfig: TypeOrmModuleOptions = {
   synchronize: process.env.NODE_ENV !== 'production',
   logging: process.env.NODE_ENV === 'development',
   autoLoadEntities: true,
+  timezone: 'Z',
+  dateStrings: false,
 
   entities: ['dist/modules/**/infrastructure/entity/TypeOrm*.entity.js'],
 
