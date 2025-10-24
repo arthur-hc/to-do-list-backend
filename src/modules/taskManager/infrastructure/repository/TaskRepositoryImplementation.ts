@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { TypeOrmTaskEntity } from '../entity/TypeOrmTask.entity';
 import { Repository } from 'typeorm';
 import { TypeOrmTaskEntityMapper } from '../mapper/TypeOrmTask.mapper';
-import { FindAllTasksFilter } from '../../domain/interfaces/IFindAllTasksFilter';
+import { IFindAllTasksFilter } from '../../domain/interfaces/IFindAllTasksFilter';
 
 @Injectable()
 export class TaskRepositoryImplementation implements ITaskRepository {
@@ -14,7 +14,7 @@ export class TaskRepositoryImplementation implements ITaskRepository {
     private readonly taskRepository: Repository<TypeOrmTaskEntity>,
   ) {}
 
-  async findAll(filter?: FindAllTasksFilter): Promise<Task[]> {
+  async findAll(filter?: IFindAllTasksFilter): Promise<Task[]> {
     const queryBuilder = this.taskRepository.createQueryBuilder('task');
 
     if (filter?.completed !== undefined) {

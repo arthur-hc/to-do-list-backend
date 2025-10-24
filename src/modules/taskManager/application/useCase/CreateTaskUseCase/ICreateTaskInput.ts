@@ -1,4 +1,4 @@
-export interface CreateTaskInput {
+export interface ICreateTaskInput {
   title: string;
   description: string;
 }

@@ -1,8 +1,8 @@
 import { Task } from '../entity/Task.entity';
-import { FindAllTasksFilter } from './IFindAllTasksFilter';
+import { IFindAllTasksFilter } from './IFindAllTasksFilter';
 
 export interface ITaskRepository {
-  findAll(filter?: FindAllTasksFilter): Promise<Task[]>;
+  findAll(filter?: IFindAllTasksFilter): Promise<Task[]>;
   findById(id: number): Promise<Task | null>;
   create(
     task: Pick<Task, 'title' | 'description' | 'completed'>,

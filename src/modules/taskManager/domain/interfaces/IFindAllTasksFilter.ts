@@ -1,3 +1,3 @@
-export interface FindAllTasksFilter {
+export interface IFindAllTasksFilter {
   completed?: boolean;
 }

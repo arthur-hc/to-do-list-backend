@@ -5,7 +5,7 @@ import {
   ITaskRepositoryToken,
 } from '../../../domain/interfaces/ITask.repository';
 import { Task } from '../../../domain/entity/Task.entity';
-import { CreateTaskInput } from './ICreateTaskInput';
+import { ICreateTaskInput } from './ICreateTaskInput';
 
 describe('CreateTaskUseCase', () => {
   let useCase: CreateTaskUseCase;
@@ -37,7 +37,7 @@ describe('CreateTaskUseCase', () => {
 
   it('should create a new task successfully', async () => {
     // Arrange
-    const input: CreateTaskInput = {
+    const input: ICreateTaskInput = {
       title: 'Test Task',
       description: 'Test Description',
     };
