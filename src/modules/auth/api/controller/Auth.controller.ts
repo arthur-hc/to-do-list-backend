@@ -21,7 +21,7 @@ export class AuthController {
     status: 401,
     description: 'Credenciais inválidas',
   })
-  async login(@Body() loginDto: LoginDto): Promise<LoginResponseDto> {
+  async handle(@Body() loginDto: LoginDto): Promise<LoginResponseDto> {
     return await this.loginUseCase.execute(loginDto);
   }
 }

@@ -4,13 +4,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthController } from './api/controller/Auth.controller';
 import { LoginUseCase } from './application/useCase/LoginUseCase/LoginUseCase';
 import { UserSeedService } from './application/service/UserSeedService';
-import { TypeOrmUser } from './infrastructure/entity/TypeOrmUser.entity';
+import { TypeOrmUserEntity } from './infrastructure/entity/TypeOrmUserEntity.entity';
 import { UserRepositoryImplementation } from './infrastructure/repository/UserRepositoryImplementation';
 import { IUserRepositoryToken } from './domain/interfaces/IUser.repository';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([TypeOrmUser]),
+    TypeOrmModule.forFeature([TypeOrmUserEntity]),
     JwtModule.register({
       secret: process.env.JWT_SECRET || 'your-secret-key',
       signOptions: { expiresIn: '1h' },

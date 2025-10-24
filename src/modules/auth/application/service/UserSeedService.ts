@@ -33,7 +33,7 @@ export class UserSeedService implements OnModuleInit {
     const defaultUser = User.create(defaultEmail, hashedPassword);
 
     // Salvar no banco
-    await this.userRepository.save(defaultUser);
+    await this.userRepository.create(defaultUser);
 
     console.log(`Default user created: ${defaultEmail}`);
   }

@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 
 @Entity('users')
-export class TypeOrmUser {
+export class TypeOrmUserEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
