@@ -1,11 +1,20 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateTaskUseCase } from '../../../application/useCase/CreateTask/CreateTaskUseCase';
 import { ITaskResponse } from '../../presenter/ITaskResponse';
 import { TaskPresenter } from '../../presenter/Task.presenter';
 import { CreateTaskBodyDto } from './CreateTaskBody.dto';
+import { JwtAuthGuard } from 'src/modules/auth/infrastructure/security/JwtAuth.guard';
 
 @ApiTags('tasks')
+@UseGuards(JwtAuthGuard)
 @Controller()
 export class CreateTaskController {
   constructor(private readonly createTaskUseCase: CreateTaskUseCase) {}

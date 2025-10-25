@@ -1,11 +1,20 @@
-import { Controller, Get, HttpCode, HttpStatus, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { GetAllTasksUseCase } from '../../../application/useCase/GetAllTasks/GetAllTasksUseCase';
 import { ITaskResponse } from '../../presenter/ITaskResponse';
 import { TaskPresenter } from '../../presenter/Task.presenter';
 import { GetAllTasksQueryDto } from './GetAllTasksQuery.dto';
+import { JwtAuthGuard } from 'src/modules/auth/infrastructure/security/JwtAuth.guard';
 
 @ApiTags('tasks')
+@UseGuards(JwtAuthGuard)
 @Controller()
 export class GetAllTasksController {
   constructor(private readonly getAllTasksUseCase: GetAllTasksUseCase) {}

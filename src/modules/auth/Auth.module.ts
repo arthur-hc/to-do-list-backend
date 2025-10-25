@@ -11,6 +11,7 @@ import { IUserRepositoryToken } from './domain/interfaces/IUserRepository';
 import { TypeOrmUserEntity } from './infrastructure/entity/TypeOrmUser.entity';
 import { UserRepositoryImplementation } from './infrastructure/repository/UserRepositoryImplementation';
 import { JwtGateway } from './infrastructure/security/JwtGateway';
+import { JwtStrategy } from './infrastructure/security/JwtStrategy';
 
 @Module({
   imports: [
@@ -35,6 +36,8 @@ import { JwtGateway } from './infrastructure/security/JwtGateway';
       provide: IJwtGatewayToken,
       useClass: JwtGateway,
     },
+    // Strategies
+    JwtStrategy,
     // Use Cases
     AuthenticateUserUseCase,
   ],
