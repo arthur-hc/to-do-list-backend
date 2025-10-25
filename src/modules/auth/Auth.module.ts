@@ -38,7 +38,7 @@ export class AuthModule implements OnModuleInit {
   ) {}
 
   async onModuleInit() {
-    const email = 'user@test.com';
+    const email = 'user@example.com';
     const password = 'pass';
     const user = await this.userRepository.findByEmail(email);
 

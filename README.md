@@ -94,7 +94,7 @@ docker-compose -f docker-compose.prod.yml down
 Para testar os endpoints protegidos, use as credenciais padrão:
 
 ```
-Email: user@test.com
+Email: user@example.com
 Senha: pass
 ```
 

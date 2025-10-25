@@ -16,11 +16,7 @@ export class AuthenticateUserUseCase {
   async execute(input: IAuthenticateUserInput): Promise<string> {
     const { email, password } = input;
 
-    const user = (await this.userRepository.findByEmail(email)) || {
-      id: '1',
-      email: 'user@test.com',
-      password: 'pass',
-    };
+    const user = await this.userRepository.findByEmail(email);
 
     const userExists = !!user;
 
