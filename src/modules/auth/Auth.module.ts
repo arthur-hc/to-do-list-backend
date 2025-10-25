@@ -1,17 +1,21 @@
 import { Inject, Module, OnModuleInit } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import * as bcrypt from 'bcrypt';
 import { AuthenticateUserController } from './api/controller/AuthenticateUser/AuthenticateUser.controller';
 import { AuthenticateUserUseCase } from './application/useCase/AuthenticateUser/AuthenticateUserUseCase';
-import { IUserRepositoryToken } from './domain/interfaces/IUserRepository';
+import { IJwtGatewayToken } from './domain/interfaces/IJwtGateway';
 import type { IUserRepository } from './domain/interfaces/IUserRepository';
-import { UserRepositoryImplementation } from './infrastructure/repository/UserRepositoryImplementation';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { IUserRepositoryToken } from './domain/interfaces/IUserRepository';
 import { TypeOrmUserEntity } from './infrastructure/entity/TypeOrmUser.entity';
-import { JwtModule } from '@nestjs/jwt';
-import * as bcrypt from 'bcrypt';
+import { UserRepositoryImplementation } from './infrastructure/repository/UserRepositoryImplementation';
+import { JwtGateway } from './infrastructure/security/JwtGateway';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([TypeOrmUserEntity]),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secret: process.env.JWT_SECRET || 'JWT_SECRET',
       signOptions: {
@@ -26,10 +30,15 @@ import * as bcrypt from 'bcrypt';
       provide: IUserRepositoryToken,
       useClass: UserRepositoryImplementation,
     },
+    // Gateways Injection
+    {
+      provide: IJwtGatewayToken,
+      useClass: JwtGateway,
+    },
     // Use Cases
     AuthenticateUserUseCase,
   ],
-  exports: [IUserRepositoryToken],
+  exports: [IUserRepositoryToken, IJwtGatewayToken],
 })
 export class AuthModule implements OnModuleInit {
   constructor(
@@ -37,6 +46,7 @@ export class AuthModule implements OnModuleInit {
     private readonly userRepository: IUserRepository,
   ) {}
 
+  // Remover seed após feature de registro de usuário estar pronta
   async onModuleInit() {
     const email = 'user@example.com';
     const password = 'pass';

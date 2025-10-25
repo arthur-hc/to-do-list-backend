@@ -1,12 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UnauthorizedException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { AuthenticateUserUseCase } from './AuthenticateUserUseCase';
 import {
   IUserRepository,
   IUserRepositoryToken,
 } from '../../../domain/interfaces/IUserRepository';
+import {
+  IJwtGateway,
+  IJwtGatewayToken,
+} from '../../../domain/interfaces/IJwtGateway';
 import { User } from '../../../domain/entity/User.entity';
 import { IAuthenticateUserInput } from './IAuthenticateUserInput';
 
@@ -15,7 +18,7 @@ jest.mock('bcrypt');
 describe('AuthenticateUserUseCase', () => {
   let useCase: AuthenticateUserUseCase;
   let userRepository: jest.Mocked<IUserRepository>;
-  let jwtService: jest.Mocked<JwtService>;
+  let jwtGateway: jest.Mocked<IJwtGateway>;
 
   beforeEach(async () => {
     const mockUserRepository: jest.Mocked<IUserRepository> = {
@@ -23,9 +26,9 @@ describe('AuthenticateUserUseCase', () => {
       create: jest.fn(),
     };
 
-    const mockJwtService = {
-      sign: jest.fn(),
-    } as jest.Mocked<Pick<JwtService, 'sign'>>;
+    const mockJwtGateway: jest.Mocked<IJwtGateway> = {
+      signAsync: jest.fn(),
+    };
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -35,8 +38,8 @@ describe('AuthenticateUserUseCase', () => {
           useValue: mockUserRepository,
         },
         {
-          provide: JwtService,
-          useValue: mockJwtService,
+          provide: IJwtGatewayToken,
+          useValue: mockJwtGateway,
         },
       ],
     }).compile();
@@ -44,7 +47,7 @@ describe('AuthenticateUserUseCase', () => {
     useCase = module.get<AuthenticateUserUseCase>(AuthenticateUserUseCase);
     userRepository =
       module.get<jest.Mocked<IUserRepository>>(IUserRepositoryToken);
-    jwtService = module.get<jest.Mocked<JwtService>>(JwtService);
+    jwtGateway = module.get<jest.Mocked<IJwtGateway>>(IJwtGatewayToken);
   });
 
   afterEach(() => {
@@ -77,8 +80,8 @@ describe('AuthenticateUserUseCase', () => {
       .mockResolvedValue(true as never);
 
     const jwtSignSpy = jest
-      .spyOn(jwtService, 'sign')
-      .mockReturnValue(expectedToken);
+      .spyOn(jwtGateway, 'signAsync')
+      .mockResolvedValue(expectedToken);
 
     // Act
     const result = await useCase.execute(input);
@@ -192,7 +195,7 @@ describe('AuthenticateUserUseCase', () => {
     await expect(useCase.execute(input)).rejects.toThrow('Bcrypt error');
   });
 
-  it('should throw error when JWT service fails', async () => {
+  it('should throw error when JWT gateway fails', async () => {
     // Arrange
     const input: IAuthenticateUserInput = {
       email: 'user@test.com',
@@ -209,9 +212,9 @@ describe('AuthenticateUserUseCase', () => {
 
     jest.spyOn(userRepository, 'findByEmail').mockResolvedValue(mockUser);
     jest.spyOn(bcrypt, 'compare').mockResolvedValue(true as never);
-    jest.spyOn(jwtService, 'sign').mockImplementation(() => {
-      throw new Error('JWT error');
-    });
+    jest
+      .spyOn(jwtGateway, 'signAsync')
+      .mockRejectedValue(new Error('JWT error'));
 
     // Act & Assert
     await expect(useCase.execute(input)).rejects.toThrow('JWT error');
