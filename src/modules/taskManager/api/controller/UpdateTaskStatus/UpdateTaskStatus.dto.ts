@@ -2,7 +2,7 @@ import { IsNotEmpty, IsNumber, Min } from 'class-validator';
 import { Transform } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class UpdateTaskStatusParamsDto {
+export class UpdateTaskStatusDto {
   @ApiProperty({
     description: 'ID único da tarefa',
     example: 1,

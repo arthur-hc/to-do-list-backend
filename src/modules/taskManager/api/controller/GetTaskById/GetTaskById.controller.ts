@@ -1,8 +1,8 @@
 import { Controller, Get, HttpCode, HttpStatus, Param } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
-import { GetTaskByIdUseCase } from '../../application/useCase/GetTaskByIdUseCase/GetTaskByIdUseCase';
-import { GetTaskByIdDto } from '../dto/GetTaskById.dto';
-import { Task } from '../../domain/entity/Task.entity';
+import { GetTaskByIdUseCase } from '../../../application/useCase/GetTaskByIdUseCase/GetTaskByIdUseCase';
+import { GetTaskByIdDto } from './GetTaskById.dto';
+import { Task } from '../../../domain/entity/Task.entity';
 
 @ApiTags('tasks')
 @Controller()
