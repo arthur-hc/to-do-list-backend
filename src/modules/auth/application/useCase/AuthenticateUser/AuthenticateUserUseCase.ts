@@ -1,8 +1,8 @@
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import type { IUserRepository } from 'src/modules/auth/domain/interfaces/IUserRepository';
-import { IUserRepositoryToken } from 'src/modules/auth/domain/interfaces/IUserRepository';
+import type { IUserRepository } from '../../../domain/interfaces/IUserRepository';
+import { IUserRepositoryToken } from '../../../domain/interfaces/IUserRepository';
 import { IAuthenticateUserInput } from './IAuthenticateUserInput';
 
 @Injectable()
