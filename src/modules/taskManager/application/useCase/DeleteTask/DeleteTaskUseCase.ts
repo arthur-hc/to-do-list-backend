@@ -1,7 +1,6 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import type { ITaskRepository } from '../../../domain/interfaces/ITask.repository';
 import { ITaskRepositoryToken } from '../../../domain/interfaces/ITask.repository';
-import { IDeleteTaskInput } from './IDeleteTaskInput';
 
 @Injectable()
 export class DeleteTaskUseCase {
@@ -10,9 +9,7 @@ export class DeleteTaskUseCase {
     private readonly taskRepository: ITaskRepository,
   ) {}
 
-  async execute(input: IDeleteTaskInput): Promise<void> {
-    const { id } = input;
-
+  async execute(id: number): Promise<void> {
     const task = await this.taskRepository.findById(id);
 
     const taskExists = !!task;

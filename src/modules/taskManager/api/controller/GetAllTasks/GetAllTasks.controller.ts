@@ -1,8 +1,9 @@
 import { Controller, Get, HttpCode, HttpStatus, Query } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { GetAllTasksUseCase } from '../../application/useCase/GetAllTasksUseCase/GetAllTasksUseCase';
-import { Task } from '../../domain/entity/Task.entity';
-import { GetAllTasksDto } from '../dto/GetAllTasks.dto';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { GetAllTasksUseCase } from '../../../application/useCase/GetAllTasks/GetAllTasksUseCase';
+import { ITaskResponse } from '../../presenter/ITaskResponse';
+import { TaskPresenter } from '../../presenter/Task.presenter';
+import { GetAllTasksQueryDto } from './GetAllTasksQuery.dto';
 
 @ApiTags('tasks')
 @Controller()
@@ -16,10 +17,10 @@ export class GetAllTasksController {
     status: 200,
     description: 'Lista de tarefas retornada com sucesso',
   })
-  async handle(@Query() query: GetAllTasksDto): Promise<Task[]> {
+  async handle(@Query() query: GetAllTasksQueryDto): Promise<ITaskResponse[]> {
     {
       const tasks = await this.getAllTasksUseCase.execute(query);
-      return tasks;
+      return TaskPresenter.presentCollection(tasks);
     }
   }
 }

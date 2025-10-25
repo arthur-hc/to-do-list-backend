@@ -45,7 +45,7 @@ git clone https://github.com/arthur-hc/to-do-list-backend.git
 cd to-do-list-backend
 ```
 
-### 2. Desenvolvimento local (recomendado)
+### 2. Desenvolvimento local (apenas banco no docker)
 
 ```bash
 # 1. Subir apenas MySQL
@@ -61,7 +61,7 @@ npm run start:dev
 docker-compose -f docker-compose.local.yml down
 ```
 
-### 3. Docker completo (desenvolvimento)
+### 3. Docker completo (recomendado)
 
 ```bash
 # Subir App + MySQL
@@ -94,7 +94,7 @@ docker-compose -f docker-compose.prod.yml down
 Para testar os endpoints protegidos, use as credenciais padrão:
 
 ```
-Email: user@test.com
+Email: user@example.com
 Senha: pass
 ```
 

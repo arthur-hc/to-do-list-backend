@@ -1,8 +1,9 @@
 import { Controller, HttpCode, HttpStatus, Param, Patch } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
-import { UpdateTaskStatusUseCase } from '../../application/useCase/UpdateTaskStatusUseCase/UpdateTaskStatusUseCase';
-import { Task } from '../../domain/entity/Task.entity';
-import { UpdateTaskStatusParamsDto } from '../dto/UpdateTaskStatusParams.dto';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { UpdateTaskStatusUseCase } from '../../../application/useCase/UpdateTaskStatus/UpdateTaskStatusUseCase';
+import { ITaskResponse } from '../../presenter/ITaskResponse';
+import { TaskPresenter } from '../../presenter/Task.presenter';
+import { UpdateTaskStatusParamsDto } from './UpdateTaskStatusParams.dto';
 
 @ApiTags('tasks')
 @Controller()
@@ -23,9 +24,11 @@ export class UpdateTaskStatusController {
     status: 200,
     description: 'Status da tarefa atualizado com sucesso',
   })
-  async handle(@Param() params: UpdateTaskStatusParamsDto): Promise<Task> {
+  async handle(
+    @Param() params: UpdateTaskStatusParamsDto,
+  ): Promise<ITaskResponse> {
     const { id } = params;
     const updatedTask = await this.updateTaskStatusUseCase.execute(id);
-    return updatedTask;
+    return TaskPresenter.present(updatedTask);
   }
 }
