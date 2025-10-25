@@ -3,10 +3,15 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { IAuthenticateUserResponse } from '../../presenter/AuthenticateUser/IAuthenticateUserResponse';
 import { AuthenticateUserPresenter } from '../../presenter/AuthenticateUser/AuthenticateUser.presenter';
 import { AuthenticateUserBodyDto } from './AuthenticateUserBody.dto';
+import { AuthenticateUserUseCase } from 'src/modules/auth/application/useCase/AuthenticateUser/AuthenticateUserUseCase';
 
 @ApiTags('User')
 @Controller()
 export class AuthenticateUserController {
+  constructor(
+    private readonly authenticateUserUseCase: AuthenticateUserUseCase,
+  ) {}
+
   @Post('/authenticate')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Autenticar um usuário' })
@@ -17,7 +22,7 @@ export class AuthenticateUserController {
   async handle(
     @Body() body: AuthenticateUserBodyDto,
   ): Promise<IAuthenticateUserResponse> {
-    const token = 'Will return a jwt token here';
+    const token = await this.authenticateUserUseCase.execute(body);
     return AuthenticateUserPresenter.authenticateResponse(token);
   }
 }
