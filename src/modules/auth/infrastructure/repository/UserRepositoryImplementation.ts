@@ -17,4 +17,10 @@ export class UserRepositoryImplementation implements IUserRepository {
 
     return user ? TypeOrmUserEntityMapper.fromTypeOrmToDomain(user) : null;
   }
+
+  async create(user: Pick<User, 'email' | 'password'>): Promise<User> {
+    const newUser = this.userRepository.create(user);
+    const createdUser = await this.userRepository.save(newUser);
+    return TypeOrmUserEntityMapper.fromTypeOrmToDomain(createdUser);
+  }
 }

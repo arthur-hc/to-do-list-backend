@@ -1,11 +1,13 @@
-import { Module } from '@nestjs/common';
+import { Inject, Module, OnModuleInit } from '@nestjs/common';
 import { AuthenticateUserController } from './api/controller/AuthenticateUser/AuthenticateUser.controller';
 import { AuthenticateUserUseCase } from './application/useCase/AuthenticateUser/AuthenticateUserUseCase';
 import { IUserRepositoryToken } from './domain/interfaces/IUserRepository';
+import type { IUserRepository } from './domain/interfaces/IUserRepository';
 import { UserRepositoryImplementation } from './infrastructure/repository/UserRepositoryImplementation';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmUserEntity } from './infrastructure/entity/TypeOrmUser.entity';
 import { JwtModule } from '@nestjs/jwt';
+import * as bcrypt from 'bcrypt';
 
 @Module({
   imports: [
@@ -29,4 +31,23 @@ import { JwtModule } from '@nestjs/jwt';
   ],
   exports: [IUserRepositoryToken],
 })
-export class AuthModule {}
+export class AuthModule implements OnModuleInit {
+  constructor(
+    @Inject(IUserRepositoryToken)
+    private readonly userRepository: IUserRepository,
+  ) {}
+
+  async onModuleInit() {
+    const email = 'user@test.com';
+    const password = 'pass';
+    const user = await this.userRepository.findByEmail(email);
+
+    if (!user) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      await this.userRepository.create({
+        email,
+        password: hashedPassword,
+      });
+    }
+  }
+}
