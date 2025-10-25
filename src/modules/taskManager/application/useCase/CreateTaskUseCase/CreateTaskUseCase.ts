@@ -13,7 +13,7 @@ export class CreateTaskUseCase {
 
   async execute(createTaskInput: ICreateTaskInput): Promise<Task> {
     const { title, description } = createTaskInput;
-    const newTask = Task.createNew(title, description);
+    const newTask = Task.create(title, description);
     const createdTask = await this.taskRepository.create(newTask);
     return createdTask;
   }
