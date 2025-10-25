@@ -6,12 +6,19 @@ import {
   Param,
   UseGuards,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiParam,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
 import { DeleteTaskUseCase } from '../../../application/useCase/DeleteTask/DeleteTaskUseCase';
 import { DeleteTaskParamsDto } from './DeleteTaskParams.dto';
 import { JwtAuthGuard } from 'src/modules/auth/infrastructure/security/JwtAuth.guard';
 
 @ApiTags('tasks')
+@ApiBearerAuth('JWT-auth')
 @UseGuards(JwtAuthGuard)
 @Controller()
 export class DeleteTaskController {

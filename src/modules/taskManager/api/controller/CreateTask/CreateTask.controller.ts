@@ -6,7 +6,12 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CreateTaskUseCase } from '../../../application/useCase/CreateTask/CreateTaskUseCase';
 import { ITaskResponse } from '../../presenter/ITaskResponse';
 import { TaskPresenter } from '../../presenter/Task.presenter';
@@ -14,6 +19,7 @@ import { CreateTaskBodyDto } from './CreateTaskBody.dto';
 import { JwtAuthGuard } from 'src/modules/auth/infrastructure/security/JwtAuth.guard';
 
 @ApiTags('tasks')
+@ApiBearerAuth('JWT-auth')
 @UseGuards(JwtAuthGuard)
 @Controller()
 export class CreateTaskController {
