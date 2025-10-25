@@ -4,7 +4,7 @@ import { ITaskRepository } from '../../domain/interfaces/ITask.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TypeOrmTaskEntity } from '../entity/TypeOrmTask.entity';
 import { Repository } from 'typeorm';
-import { TypeOrmTaskEntityMapper } from '../mapper/TypeOrmTask.mapper';
+import { TypeOrmTaskEntityMapper } from '../mapper/TypeOrmTaskEntity.mapper';
 import { IFindAllTasksFilter } from '../../domain/interfaces/IFindAllTasksFilter';
 
 @Injectable()
