@@ -1,9 +1,9 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import type { IUserRepository } from 'src/modules/auth/domain/interfaces/IUserRepository';
 import { IUserRepositoryToken } from 'src/modules/auth/domain/interfaces/IUserRepository';
 import { IAuthenticateUserInput } from './IAuthenticateUserInput';
-import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthenticateUserUseCase {
@@ -25,13 +25,13 @@ export class AuthenticateUserUseCase {
     const userExists = !!user;
 
     if (!userExists) {
-      throw new NotFoundException(`Invalid credentials`);
+      throw new UnauthorizedException(`Invalid credentials`);
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-      throw new NotFoundException(`Invalid credentials`);
+      throw new UnauthorizedException(`Invalid credentials`);
     }
 
     const payload = {
