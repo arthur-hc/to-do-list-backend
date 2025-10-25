@@ -2,7 +2,7 @@ import { IsOptional, IsIn } from 'class-validator';
 import { Transform } from 'class-transformer';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 
-export class GetAllTasksDto {
+export class GetAllTasksQueryDto {
   @ApiPropertyOptional({
     description: 'Filtrar tarefas por status de conclusão',
     example: true,

@@ -1,7 +1,7 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { CreateTaskUseCase } from '../../../application/useCase/CreateTaskUseCase/CreateTaskUseCase';
-import { CreateTaskDto } from './CreateTask.dto';
+import { CreateTaskBodyDto } from './CreateTask.dto';
 import { Task } from '../../../domain/entity/Task.entity';
 
 @ApiTags('tasks')
@@ -16,7 +16,7 @@ export class CreateTaskController {
     status: 201,
     description: 'Tarefa criada com sucesso',
   })
-  async handle(@Body() createTaskBody: CreateTaskDto): Promise<Task> {
+  async handle(@Body() createTaskBody: CreateTaskBodyDto): Promise<Task> {
     const newTask = await this.createTaskUseCase.execute(createTaskBody);
     return newTask;
   }

@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateTaskDto {
+export class CreateTaskBodyDto {
   @ApiProperty({
     description: 'Título da tarefa',
     example: 'Estudar NestJS',

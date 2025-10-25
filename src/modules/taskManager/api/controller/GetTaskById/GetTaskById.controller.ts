@@ -1,7 +1,7 @@
 import { Controller, Get, HttpCode, HttpStatus, Param } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { GetTaskByIdUseCase } from '../../../application/useCase/GetTaskByIdUseCase/GetTaskByIdUseCase';
-import { GetTaskByIdDto } from './GetTaskById.dto';
+import { GetTaskByIdParamsDto } from './GetTaskByIdParams.dto';
 import { Task } from '../../../domain/entity/Task.entity';
 
 @ApiTags('tasks')
@@ -21,7 +21,7 @@ export class GetTaskByIdController {
     status: 200,
     description: 'Tarefa encontrada com sucesso',
   })
-  async handle(@Param() params: GetTaskByIdDto): Promise<Task> {
+  async handle(@Param() params: GetTaskByIdParamsDto): Promise<Task> {
     const { id } = params;
     const task = await this.getTaskByIdUseCase.execute(id);
     return task;
