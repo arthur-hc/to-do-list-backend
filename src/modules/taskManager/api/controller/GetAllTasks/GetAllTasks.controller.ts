@@ -2,7 +2,7 @@ import { Controller, Get, HttpCode, HttpStatus, Query } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { GetAllTasksUseCase } from '../../../application/useCase/GetAllTasksUseCase/GetAllTasksUseCase';
 import { Task } from '../../../domain/entity/Task.entity';
-import { GetAllTasksQueryDto } from './GetAllTasks.dto';
+import { GetAllTasksQueryDto } from './GetAllTasksQuery.dto';
 
 @ApiTags('tasks')
 @Controller()
