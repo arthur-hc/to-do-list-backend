@@ -6,7 +6,7 @@ import {
   Param,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
-import { DeleteTaskUseCase } from '../../../application/useCase/DeleteTaskUseCase/DeleteTaskUseCase';
+import { DeleteTaskUseCase } from '../../../application/useCase/DeleteTask/DeleteTaskUseCase';
 import { DeleteTaskParamsDto } from './DeleteTaskParams.dto';
 
 @ApiTags('tasks')
@@ -28,6 +28,6 @@ export class DeleteTaskController {
   })
   async handle(@Param() params: DeleteTaskParamsDto): Promise<void> {
     const { id } = params;
-    await this.deleteTaskUseCase.execute({ id });
+    await this.deleteTaskUseCase.execute(id);
   }
 }

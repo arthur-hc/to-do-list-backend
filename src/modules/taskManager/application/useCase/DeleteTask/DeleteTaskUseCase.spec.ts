@@ -37,7 +37,7 @@ describe('DeleteTaskUseCase', () => {
 
   it('should delete task successfully', async () => {
     // Arrange
-    const input = { id: 1 };
+    const input = 1;
 
     const existingTask = new Task(
       1,
@@ -65,7 +65,7 @@ describe('DeleteTaskUseCase', () => {
 
   it('should throw NotFoundException when task does not exist', async () => {
     // Arrange
-    const input = { id: 999 };
+    const input = 999;
 
     jest.spyOn(taskRepository, 'findById').mockResolvedValue(null);
     const deleteSpy = jest.spyOn(taskRepository, 'delete');
@@ -80,7 +80,7 @@ describe('DeleteTaskUseCase', () => {
 
   it('should throw error when repository fails on findById', async () => {
     // Arrange
-    const input = { id: 1 };
+    const input = 1;
 
     jest
       .spyOn(taskRepository, 'findById')
@@ -94,7 +94,7 @@ describe('DeleteTaskUseCase', () => {
 
   it('should throw error when repository fails on delete', async () => {
     // Arrange
-    const input = { id: 1 };
+    const input = 1;
 
     const existingTask = new Task(
       1,
