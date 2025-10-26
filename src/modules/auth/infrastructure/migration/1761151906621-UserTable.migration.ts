@@ -1,22 +1,22 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class TaskTableMigration1761151906620 implements MigrationInterface {
+export class UserTableMigration1761151906621 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
-        CREATE TABLE \`tasks\` (
+        CREATE TABLE \`users\` (
                 \`id\` int NOT NULL AUTO_INCREMENT,
                 \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
                 \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
                 \`deletedAt\` datetime(6) NULL,
-                \`title\` varchar(255) NOT NULL,
-                \`description\` text NOT NULL,
-                \`completed\` tinyint NOT NULL DEFAULT 0,
-                PRIMARY KEY (\`id\`)
+                \`email\` varchar(255) NOT NULL,
+                \`password\` varchar(255) NOT NULL,
+                PRIMARY KEY (\`id\`),
+                UNIQUE KEY \`IDX_users_email\` (\`email\`)
             ) ENGINE=InnoDB
     `);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(`DROP TABLE \`tasks\``);
+    await queryRunner.query(`DROP TABLE \`users\``);
   }
 }
