@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { validationPipeConfig } from './config/validationPipe.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -15,16 +16,7 @@ async function bootstrap() {
     credentials: true,
   });
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-      transform: true,
-      transformOptions: {
-        enableImplicitConversion: false,
-      },
-    }),
-  );
+  app.useGlobalPipes(new ValidationPipe(validationPipeConfig));
 
   // Configuração básica do Swagger
   const config = new DocumentBuilder()
