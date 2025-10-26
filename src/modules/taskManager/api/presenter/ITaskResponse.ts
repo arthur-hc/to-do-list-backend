@@ -3,5 +3,5 @@ export interface ITaskResponse {
   title: string;
   description: string;
   completed: boolean;
-  createdAt: Date;
+  createdAt: string; // ISO date string from JSON serialization
 }

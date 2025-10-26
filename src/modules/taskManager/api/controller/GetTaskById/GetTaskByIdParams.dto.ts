@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, Min } from 'class-validator';
+import { IsInt, IsNotEmpty, IsNumber, Min } from 'class-validator';
 import { Transform } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -11,6 +11,7 @@ export class GetTaskByIdParamsDto {
   @IsNotEmpty({ message: 'ID is required' })
   @Transform(({ value }) => Number(value))
   @IsNumber({}, { message: 'ID must be a valid number' })
+  @IsInt({ message: 'ID must be an integer' })
   @Min(1, { message: 'ID must be greater than 0' })
   id: number;
 }
