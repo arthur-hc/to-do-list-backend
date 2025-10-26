@@ -16,7 +16,7 @@ export class AuthenticateUserController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Autenticar um usuário' })
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'Autenticação foi bem-sucedida.',
   })
   async handle(

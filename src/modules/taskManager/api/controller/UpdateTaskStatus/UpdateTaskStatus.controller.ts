@@ -1,11 +1,27 @@
-import { Controller, HttpCode, HttpStatus, Param, Patch } from '@nestjs/common';
-import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Patch,
+  UseGuards,
+} from '@nestjs/common';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiParam,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { UpdateTaskStatusUseCase } from '../../../application/useCase/UpdateTaskStatus/UpdateTaskStatusUseCase';
 import { ITaskResponse } from '../../presenter/ITaskResponse';
 import { TaskPresenter } from '../../presenter/Task.presenter';
 import { UpdateTaskStatusParamsDto } from './UpdateTaskStatusParams.dto';
+import { JwtAuthGuard } from 'src/modules/auth/infrastructure/security/JwtAuth.guard';
 
 @ApiTags('tasks')
+@ApiBearerAuth('JWT-auth')
+@UseGuards(JwtAuthGuard)
 @Controller()
 export class UpdateTaskStatusController {
   constructor(

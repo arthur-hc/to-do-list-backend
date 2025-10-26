@@ -1,8 +1,9 @@
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import type { IUserRepository } from 'src/modules/auth/domain/interfaces/IUserRepository';
-import { IUserRepositoryToken } from 'src/modules/auth/domain/interfaces/IUserRepository';
+import type { IUserRepository } from '../../../domain/interfaces/IUserRepository';
+import { IUserRepositoryToken } from '../../../domain/interfaces/IUserRepository';
+import type { IJwtGateway } from '../../../domain/interfaces/IJwtGateway';
+import { IJwtGatewayToken } from '../../../domain/interfaces/IJwtGateway';
 import { IAuthenticateUserInput } from './IAuthenticateUserInput';
 
 @Injectable()
@@ -10,7 +11,8 @@ export class AuthenticateUserUseCase {
   constructor(
     @Inject(IUserRepositoryToken)
     private readonly userRepository: IUserRepository,
-    private readonly jwtService: JwtService,
+    @Inject(IJwtGatewayToken)
+    private readonly jwtGateway: IJwtGateway,
   ) {}
 
   async execute(input: IAuthenticateUserInput): Promise<string> {
@@ -35,7 +37,7 @@ export class AuthenticateUserUseCase {
       email: user.email,
     };
 
-    const token = this.jwtService.sign(payload);
+    const token = await this.jwtGateway.signAsync(payload);
 
     return token;
   }

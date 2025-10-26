@@ -5,4 +5,4 @@ export interface IUserRepository {
   create(user: Pick<User, 'email' | 'password'>): Promise<User>;
 }
 
-export const IUserRepositoryToken = 'IUserRepositoryToken';
+export const IUserRepositoryToken = Symbol('IUserRepository');
