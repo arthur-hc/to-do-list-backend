@@ -3,7 +3,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { IAuthenticateUserResponse } from '../../presenter/AuthenticateUser/IAuthenticateUserResponse';
 import { AuthenticateUserPresenter } from '../../presenter/AuthenticateUser/AuthenticateUser.presenter';
 import { AuthenticateUserBodyDto } from './AuthenticateUserBody.dto';
-import { AuthenticateUserUseCase } from 'src/modules/auth/application/useCase/AuthenticateUser/AuthenticateUserUseCase';
+import { AuthenticateUserUseCase } from '../../../application/useCase/AuthenticateUser/AuthenticateUserUseCase';
 
 @ApiTags('User')
 @Controller()
