@@ -1,0 +1,37 @@
+services:
+  mysql-test:
+    image: mysql:8.0
+    container_name: todolist-mysql-test
+    environment:
+      MYSQL_ROOT_PASSWORD: test_root_pass
+      MYSQL_DATABASE: todolist_test
+      MYSQL_USER: test_user
+      MYSQL_PASSWORD: test_pass
+    ports:
+      - '3308:3306'
+    tmpfs:
+      - /var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'mysqladmin',
+          'ping',
+          '-h',
+          'localhost',
+          '-u',
+          'test_user',
+          '-ptest_pass',
+        ]
+      interval: 2s
+      timeout: 5s
+      retries: 15
+      start_period: 10s
+    networks:
+      - todolist-test-network
+
+networks:
+  todolist-test-network:
+    name: todolist-test-network
+    driver: bridge
