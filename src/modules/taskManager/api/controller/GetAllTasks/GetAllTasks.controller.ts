@@ -16,7 +16,7 @@ import { GetAllTasksUseCase } from '../../../application/useCase/GetAllTasks/Get
 import { ITaskResponse } from '../../presenter/ITaskResponse';
 import { TaskPresenter } from '../../presenter/Task.presenter';
 import { GetAllTasksQueryDto } from './GetAllTasksQuery.dto';
-import { JwtAuthGuard } from 'src/modules/auth/infrastructure/security/JwtAuth.guard';
+import { JwtAuthGuard } from '../../../../auth/infrastructure/security/JwtAuth.guard';
 
 @ApiTags('tasks')
 @ApiBearerAuth('JWT-auth')
