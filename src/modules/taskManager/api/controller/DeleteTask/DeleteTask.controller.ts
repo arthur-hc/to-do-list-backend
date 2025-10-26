@@ -15,7 +15,7 @@ import {
 } from '@nestjs/swagger';
 import { DeleteTaskUseCase } from '../../../application/useCase/DeleteTask/DeleteTaskUseCase';
 import { DeleteTaskParamsDto } from './DeleteTaskParams.dto';
-import { JwtAuthGuard } from 'src/modules/auth/infrastructure/security/JwtAuth.guard';
+import { JwtAuthGuard } from '../../../../auth/infrastructure/security/JwtAuth.guard';
 
 @ApiTags('tasks')
 @ApiBearerAuth('JWT-auth')
