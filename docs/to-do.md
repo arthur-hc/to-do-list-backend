@@ -20,14 +20,14 @@
 
 ## Autenticação & Segurança
 
-- [ ] Implementar login simples (usuário fixo) para obter JWT
-- [ ] Validação JWT nas rotas (Guards)
-- [ ] Proteções básicas (CORS, helmet)
+- [x] Implementar login simples (usuário fixo) para obter JWT
+- [x] Validação JWT nas rotas (Guards)
+- [x] Proteções básicas (CORS, helmet)
 
 ## Qualidade & Docs
 
 - [x] Testes: unitários useCases
-- [ ] Testes: unitários controllers
+- [x] Testes: unitários controllers
 - [ ] Testes: unitários repository
 - [ ] Testes: integração
 - [x] Swagger docs
