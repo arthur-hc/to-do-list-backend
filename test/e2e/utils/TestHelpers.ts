@@ -56,12 +56,21 @@ export class TestHelpers {
     return { user, token };
   }
 
+  static isValidJwt(token: string): boolean {
+    const jwtRegex = /^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/;
+    return jwtRegex.test(token);
+  }
+
   static validateJWTResponse(authResponse: IAuthenticateUserResponse): boolean {
     const isValidMessage =
       authResponse?.message === 'User authenticated successfully';
+
     const isValidToken =
-      typeof authResponse?.token === 'string' && authResponse?.token.length > 0;
+      typeof authResponse?.token === 'string' &&
+      this.isValidJwt(authResponse?.token);
+
     const isValidTokenType = authResponse?.tokenType === 'Bearer';
+
     return isValidMessage && isValidToken && isValidTokenType;
   }
 

@@ -5,9 +5,10 @@ import { AuthModule } from '../../../src/modules/auth/Auth.module';
 import { testMySqlDatabaseConfig } from './testDatabase.config';
 import { DataSource } from 'typeorm';
 import { validationPipeConfig } from '../../../src/config/validationPipe.config';
+import { Server } from 'http';
 
 export class TestAppFactory {
-  static async create(): Promise<INestApplication> {
+  static async create(): Promise<INestApplication<Server>> {
     process.env.NODE_ENV = 'test';
     process.env.DB_HOST = 'localhost';
     process.env.DB_PORT = '3308';
