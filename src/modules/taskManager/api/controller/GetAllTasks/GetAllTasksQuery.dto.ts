@@ -8,14 +8,18 @@ export class GetAllTasksQueryDto {
     example: true,
   })
   @IsOptional()
-  @IsIn([true, false, 'true', 'false'], {
+  @IsIn([true, false], {
     message: 'Completed must be true or false',
   })
-  @Transform(({ value }) => {
-    if (value === 'true' || value === true) return true;
-    if (value === 'false' || value === false) return false;
+  @Transform(({ value }: { value: string }) => {
+    if (!value) {
+      return undefined;
+    }
 
-    return undefined;
+    if (value === 'true') return true;
+    if (value === 'false') return false;
+
+    return value;
   })
   completed?: boolean;
 }
