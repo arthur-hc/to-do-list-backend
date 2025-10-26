@@ -12,7 +12,7 @@ API completa para gerenciamento de tarefas que permite:
 - ✅ Atualizar status das tarefas
 - ✅ Excluir tarefas
 - ✅ Documentação Swagger interativa
-- Autenticação JWT (pendente)
+- ✅ Autenticação JWT
 
 ## Tecnologias
 
@@ -112,7 +112,7 @@ A API possui documentação interativa completa via Swagger.
 - ✅ **Validações**: Regras de validação para cada campo
 - ✅ **Teste interativo**: Execute requisições diretamente na interface
 - ✅ **Filtros**: Documentação de query parameters (ex: `?completed=true`)
-- **Autenticação JWT**: Sistema de login e endpoints protegidos
+- ✅ **Autenticação JWT**: Sistema de login e endpoints protegidos
 
 ## Comandos úteis
 
