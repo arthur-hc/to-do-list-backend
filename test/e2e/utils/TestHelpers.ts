@@ -4,7 +4,9 @@ import { DataSource } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Server } from 'http';
 import { TypeOrmUserEntity } from '../../../src/modules/auth/infrastructure/entity/TypeOrmUser.entity';
+import { TypeOrmTaskEntity } from '../../../src/modules/taskManager/infrastructure/entity/TypeOrmTask.entity';
 import { IAuthenticateUserResponse } from 'src/modules/auth/api/presenter/AuthenticateUser/IAuthenticateUserResponse';
+import { ITaskResponse } from 'src/modules/taskManager/api/presenter/ITaskResponse';
 
 export class TestHelpers {
   static async createTestUser(
@@ -100,5 +102,75 @@ export class TestHelpers {
     const user = await this.getUserFromDatabase(typeOrmDataSource, email);
     const userExists = !!user;
     return userExists;
+  }
+
+  static async createTestTask(
+    typeOrmDataSource: DataSource,
+    taskData: { title: string; description: string; completed?: boolean } = {
+      title: 'Test Task',
+      description: 'Test Description',
+      completed: false,
+    },
+  ): Promise<TypeOrmTaskEntity> {
+    const taskRepository = typeOrmDataSource.getRepository(TypeOrmTaskEntity);
+    const task = await taskRepository.save({
+      title: taskData.title,
+      description: taskData.description,
+      completed: taskData.completed ?? false,
+    });
+    return task;
+  }
+
+  static async getTaskFromDatabase(
+    typeOrmDataSource: DataSource,
+    taskId: number,
+  ): Promise<TypeOrmTaskEntity | null> {
+    const taskRepository = typeOrmDataSource.getRepository(TypeOrmTaskEntity);
+    const task = await taskRepository.findOne({ where: { id: taskId } });
+    return task;
+  }
+
+  static async taskExistsInDatabase(
+    typeOrmDataSource: DataSource,
+    taskId: number,
+  ): Promise<boolean> {
+    const task = await this.getTaskFromDatabase(typeOrmDataSource, taskId);
+    return !!task;
+  }
+
+  static generateUniqueTaskData(suffix: string = Date.now().toString()): {
+    title: string;
+    description: string;
+  } {
+    return {
+      title: `Test Task ${suffix}`,
+      description: `Test Description ${suffix}`,
+    };
+  }
+
+  static validateTaskResponse(taskResponse: ITaskResponse): boolean {
+    const hasValidId = typeof taskResponse.id === 'number';
+    const hasValidTitle = typeof taskResponse.title === 'string';
+    const hasValidDescription = typeof taskResponse.description === 'string';
+    const hasValidCompleted = typeof taskResponse.completed === 'boolean';
+
+    const hasValidCreatedAt =
+      typeof taskResponse.createdAt === 'string' &&
+      !isNaN(new Date(taskResponse.createdAt).getTime());
+
+    return (
+      hasValidId &&
+      hasValidTitle &&
+      hasValidDescription &&
+      hasValidCompleted &&
+      hasValidCreatedAt
+    );
+  }
+
+  static validateTasksCollectionResponse(
+    tasksResponse: ITaskResponse[],
+  ): boolean {
+    if (!Array.isArray(tasksResponse)) return false;
+    return tasksResponse.every((task) => this.validateTaskResponse(task));
   }
 }
