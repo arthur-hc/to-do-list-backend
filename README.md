@@ -135,4 +135,64 @@ npm run test:cov
 Esta API é consumida pelo frontend disponível em:
 https://github.com/arthur-hc/to-do-list-frontend
 
----
+# Testes
+
+## Unitários
+
+### Como Executar
+
+### Opção 1: Execução Única
+
+```bash
+npm test
+```
+
+### Opção 2: Modo Watch (desenvolvimento)
+
+```bash
+npm run test:watch
+```
+
+### Opção 3: Com Cobertura de Código
+
+```bash
+npm run test:cov
+```
+
+## Integração (necessário docker)
+
+### Como Executar
+
+### Opção 1: Execução Isolada (Recomendado)
+
+```bash
+npm run test:e2e:isolated
+```
+
+Este comando:
+
+1. Sobe o container MySQL na porta 3308
+2. Aguarda o banco inicializar
+3. Executa todos os testes E2E
+4. Derruba o container automaticamente
+
+### Opção 2: Setup Manual
+
+```bash
+# 1. Subir o banco de teste
+npm run test:e2e:setup
+
+# 2. Executar os testes
+npm run test:e2e
+
+# 3. Derrubar o banco (quando terminar)
+npm run test:e2e:teardown
+```
+
+### Opção 3: Desenvolvimento com Watch
+
+```bash
+npm run test:e2e:setup     # Uma vez
+npm run test:e2e:watch     # Fica rodando
+npm run test:e2e:teardown  # Finaliza o ambiente de teste
+```
