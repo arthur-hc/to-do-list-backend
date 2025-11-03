@@ -1,4 +1,4 @@
-[![EN](https://img.shields.io/badge/lang-EN-blue)](./README.en.md)
+[![EN](https://img.shields.io/badge/lang-EN-blue)](./README.md)
 
 # To‑Do List Backend
 
