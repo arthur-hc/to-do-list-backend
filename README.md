@@ -1,20 +1,22 @@
+[![PT-BR](https://img.shields.io/badge/lang-PT-blue)](./README.md)
+
 # To‑Do List Backend
 
-Uma API REST para gerenciar tarefas (CRUD) desenvolvida em NestJS com TypeScript, TypeORM e MySQL.
+A REST API for managing tasks (CRUD) developed in NestJS with TypeScript, TypeORM and MySQL.
 
-## O que é
+## What it is
 
-API completa para gerenciamento de tarefas que permite:
+Complete API for task management that allows:
 
-- ✅ Criar novas tarefas
-- ✅ Listar todas as tarefas com filtros
-- ✅ Buscar tarefa por ID
-- ✅ Atualizar status das tarefas
-- ✅ Excluir tarefas
-- ✅ Documentação Swagger interativa
-- ✅ Autenticação JWT
+- ✅ Create new tasks
+- ✅ List all tasks with filters
+- ✅ Get task by ID
+- ✅ Update task status
+- ✅ Delete tasks
+- ✅ Interactive Swagger documentation
+- ✅ JWT Authentication
 
-## Tecnologias
+## Technologies
 
 - NestJS
 - TypeScript
@@ -24,115 +26,115 @@ API completa para gerenciamento de tarefas que permite:
 - Swagger/OpenAPI
 - Docker
 
-## Arquitetura e conceitos aplicados
+## Architecture and applied concepts
 
 - Clean Architecture
 - DDD
 - SOLID
 
-## Pré-requisitos
+## Prerequisites
 
 - Node.js (>= 20)
 - Docker & docker-compose
-- npm (ou pnpm/yarn)
+- npm (or pnpm/yarn)
 
-## Como rodar
+## How to run
 
-### 1. Clone o repositório
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/arthur-hc/to-do-list-backend.git
 cd to-do-list-backend
 ```
 
-### 2. Desenvolvimento local (apenas banco no docker)
+### 2. Local development (database only in docker)
 
 ```bash
-# 1. Subir apenas MySQL
+# 1. Start only MySQL
 docker-compose -f docker-compose.local.yml up -d
 
-# 2. Instalar dependências
+# 2. Install dependencies
 npm install
 
-# 3. Rodar app localmente
+# 3. Run the app locally
 npm run start:dev
 
-# 4. Parar MySQL (quando terminar)
+# 4. Stop MySQL (when finished)
 docker-compose -f docker-compose.local.yml down
 ```
 
-### 3. Docker completo (recomendado)
+### 3. Full Docker (recommended)
 
 ```bash
-# Subir App + MySQL
+# Start App + MySQL
 docker-compose -f docker-compose.dev.yml up --build
 
-# Ou em background
+# Or in background
 docker-compose -f docker-compose.dev.yml up -d --build
 
-# Parar tudo
+# Stop everything
 docker-compose -f docker-compose.dev.yml down
 ```
 
-### 4. Docker produção
+### 4. Docker production
 
 ```bash
-# Subir versão otimizada
+# Start optimized version
 docker-compose -f docker-compose.prod.yml up --build -d
 
-# Parar tudo
+# Stop everything
 docker-compose -f docker-compose.prod.yml down
 ```
 
-## Acesse a aplicação
+## Access the application
 
 - **API**: http://localhost:3000/api
 - **Swagger**: http://localhost:3000/api/docs
 
-## Autenticação
+## Authentication
 
-Para testar os endpoints protegidos, use as credenciais padrão:
+To test protected endpoints, use the default credentials:
 
 ```
 Email: user@example.com
-Senha: pass
+Password: pass
 ```
 
-Faça login no endpoint `/api/auth/login` para obter o token JWT.
+Login at the `/api/auth/login` endpoint to obtain the JWT token.
 
-## Documentação da API (Swagger)
+## API Documentation (Swagger)
 
-A API possui documentação interativa completa via Swagger.
+The API has complete interactive documentation via Swagger.
 
-### O que você encontrará no Swagger:
+### What you'll find in Swagger:
 
-- ✅ **Endpoints completos**: GET, POST, PATCH, DELETE para tarefas
-- ✅ **Exemplos de requisições**: Dados de exemplo para todos os endpoints
-- ✅ **Schemas detalhados**: Documentação de todos os DTOs e responses
-- ✅ **Validações**: Regras de validação para cada campo
-- ✅ **Teste interativo**: Execute requisições diretamente na interface
-- ✅ **Filtros**: Documentação de query parameters (ex: `?completed=true`)
-- ✅ **Autenticação JWT**: Sistema de login e endpoints protegidos
+- ✅ **Complete endpoints**: GET, POST, PATCH, DELETE for tasks
+- ✅ **Request examples**: Example data for all endpoints
+- ✅ **Detailed schemas**: Documentation for all DTOs and responses
+- ✅ **Validations**: Validation rules for each field
+- ✅ **Interactive testing**: Execute requests directly from the interface
+- ✅ **Filters**: Documentation of query parameters (e.g., `?completed=true`)
+- ✅ **JWT Authentication**: Login system and protected endpoints
 
-## Comandos úteis
+## Useful commands
 
 ```bash
-# Ver logs em tempo real
+# Follow logs in real time
 docker-compose -f docker-compose.local.yml logs -f
 
-# Rebuild completo (se necessário)
+# Full rebuild (if needed)
 docker-compose -f docker-compose.dev.yml build --no-cache
 
-# Rodar testes
+# Run tests
 npm test
 
-# Rodar testes com coverage
+# Run tests with coverage
 npm run test:cov
 ```
 
 ## Frontend
 
-Esta API é consumida pelo frontend disponível em:
+This API is consumed by the frontend available at:
 https://github.com/arthur-hc/to-do-list-frontend
 
 ---

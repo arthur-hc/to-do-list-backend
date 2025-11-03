@@ -28,13 +28,13 @@
 
 - [x] Testes: unitários useCases
 - [x] Testes: unitários controllers
-- [ ] Testes: unitários repository
-- [ ] Testes: integração
+- [x] Testes: unitários repository
+- [x] Testes: integração
 - [x] Swagger docs
 
 # Fase 2 (Futuro)
 
 - [ ] Paginação na listagem
 - [ ] Query helper para permitir mais filtros sem if
-- [ ] Criar camada de presenter
+- [x] Criar camada de presenter
 - [ ] Gerenciador de erros global (formatar respostas 400/404/500)
